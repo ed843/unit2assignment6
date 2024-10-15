@@ -1,2 +1,8 @@
-package com.solvd.laba.persistence;public interface ConnectionFactory {
+package com.solvd.laba.persistence;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+
+public interface ConnectionFactory {
+    Connection getConnection() throws SQLException;
 }

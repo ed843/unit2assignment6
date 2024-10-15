@@ -1,5 +1,8 @@
-package com.solvd.laba.DAO;
+package com.solvd.laba.persistence.impl;
 
+import com.solvd.laba.DAO.MovieDao;
+import com.solvd.laba.persistence.AbstractDao;
+import com.solvd.laba.persistence.ConnectionFactory;
 import com.solvd.laba.records.Movie;
 
 import java.sql.*;
@@ -8,6 +11,9 @@ import java.util.List;
 
 public class MovieDaoImpl extends AbstractDao<Movie, Integer> implements MovieDao {
 
+    public MovieDaoImpl(ConnectionFactory connectionFactory) {
+        super(connectionFactory);
+    }
     @Override
     public Movie findById(Integer id) throws SQLException {
         String sql = "SELECT * FROM Movie WHERE movie_id = ?";

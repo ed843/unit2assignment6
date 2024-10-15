@@ -1,11 +1,15 @@
 package com.solvd.laba;
 
 import com.solvd.laba.DAO.MovieDao;
-import com.solvd.laba.DAO.MovieDaoImpl;
+import com.solvd.laba.persistence.ConnectionFactory;
+import com.solvd.laba.persistence.impl.MovieDaoImpl;
 import com.solvd.laba.exceptions.ServiceException;
+import com.solvd.laba.persistence.impl.MySqlConnectionFactory;
+import com.solvd.laba.persistence.impl.TheatreDaoImpl;
 import com.solvd.laba.records.Movie;
 import com.solvd.laba.services.MovieService;
 import com.solvd.laba.services.MovieServiceImpl;
+import com.solvd.laba.services.TheatreServiceImpl;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -13,16 +17,13 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            System.out.println("Driver loaded");
-        } catch (ClassNotFoundException e) {
-            System.out.println("Error in loading the driver... " + e.getMessage());
-            System.exit(1);
-        }
+        ConnectionFactory connectionFactory = new MySqlConnectionFactory();
 
-        MovieDao movieDao = new MovieDaoImpl();
-        MovieService movieService = new MovieServiceImpl(movieDao);
+        MovieDaoImpl movieDao = new MovieDaoImpl(connectionFactory);
+        TheatreDaoImpl theatreDao = new TheatreDaoImpl(connectionFactory);
+
+        MovieServiceImpl movieService = new MovieServiceImpl(movieDao);
+        TheatreServiceImpl theatreService = new TheatreServiceImpl(theatreDao);
 
         try {
             Movie movie = movieService.findById(1);
