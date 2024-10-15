@@ -10,9 +10,11 @@ import java.sql.ResultSet;
 
 public abstract class AbstractDao<T, ID> implements GenericDao<T, ID> {
     protected ConnectionFactory connectionFactory;
+    protected SqlProvider sqlProvider;
 
     public AbstractDao(ConnectionFactory connectionFactory) {
         this.connectionFactory = connectionFactory;
+        this.sqlProvider = new SqlProvider(connectionFactory.getDialect());
     }
 
     protected Connection getConnection() throws SQLException {

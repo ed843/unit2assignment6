@@ -1,6 +1,8 @@
 package com.solvd.laba.persistence.impl;
 
 import com.solvd.laba.persistence.ConnectionFactory;
+import com.solvd.laba.persistence.DatabaseDialect;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -18,6 +20,12 @@ public class MySqlConnectionFactory implements ConnectionFactory {
             throw new RuntimeException("Error loading database configuration", e);
         }
     }
+
+    @Override
+    public DatabaseDialect getDialect() {
+        return DatabaseDialect.MYSQL;
+    }
+
 
     @Override
     public Connection getConnection() throws SQLException {

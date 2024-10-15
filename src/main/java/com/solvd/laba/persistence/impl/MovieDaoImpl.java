@@ -3,6 +3,7 @@ package com.solvd.laba.persistence.impl;
 import com.solvd.laba.DAO.MovieDao;
 import com.solvd.laba.persistence.AbstractDao;
 import com.solvd.laba.persistence.ConnectionFactory;
+import com.solvd.laba.persistence.DatabaseDialect;
 import com.solvd.laba.records.Movie;
 
 import java.sql.*;
@@ -11,12 +12,14 @@ import java.util.List;
 
 public class MovieDaoImpl extends AbstractDao<Movie, Integer> implements MovieDao {
 
+
     public MovieDaoImpl(ConnectionFactory connectionFactory) {
         super(connectionFactory);
     }
+
     @Override
     public Movie findById(Integer id) throws SQLException {
-        String sql = "SELECT * FROM Movie WHERE movie_id = ?";
+        String sql = sqlProvider.getFindMovieByIdQuery();
         try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, id);
@@ -28,6 +31,7 @@ public class MovieDaoImpl extends AbstractDao<Movie, Integer> implements MovieDa
         }
         return null;
     }
+
 
     @Override
     public List<Movie> findAll() throws SQLException {
@@ -45,18 +49,26 @@ public class MovieDaoImpl extends AbstractDao<Movie, Integer> implements MovieDa
 
     @Override
     public void save(Movie movie) throws SQLException {
-        String sql = "INSERT INTO Movie (title, duration, genre, release_date) VALUES (?, ?, ?, ?)";
+        String sql = sqlProvider.getInsertMovieQuery();
         try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, movie.getTitle());
             stmt.setInt(2, movie.getDuration());
             stmt.setString(3, movie.getGenre());
             stmt.setDate(4, new java.sql.Date(movie.getReleaseDate().getTime()));
-            stmt.executeUpdate();
 
-            try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
-                if (generatedKeys.next()) {
-                    movie.setMovieId(generatedKeys.getInt(1));
+            if (connectionFactory.getDialect() == DatabaseDialect.POSTGRESQL) {
+                try (ResultSet rs = stmt.executeQuery()) {
+                    if (rs.next()) {
+                        movie.setMovieId(rs.getInt(1));
+                    }
+                }
+            } else {
+                stmt.executeUpdate();
+                try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        movie.setMovieId(generatedKeys.getInt(1));
+                    }
                 }
             }
         }
