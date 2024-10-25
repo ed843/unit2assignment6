@@ -1,8 +1,9 @@
-package com.solvd.laba.services;
+package com.solvd.laba.services.impl;
 
 import com.solvd.laba.exceptions.ServiceException;
 import com.solvd.laba.models.Movie;
 import com.solvd.laba.services.Mapping.MovieMapper;
+import com.solvd.laba.services.MyBatisConfig;
 import com.solvd.laba.services.interfaces.MovieService;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;

@@ -1,8 +1,9 @@
-package com.solvd.laba.services;
+package com.solvd.laba.services.impl;
 
 import com.solvd.laba.exceptions.ServiceException;
 import com.solvd.laba.models.Reservation;
 import com.solvd.laba.services.Mapping.ReservationMapper;
+import com.solvd.laba.services.MyBatisConfig;
 import com.solvd.laba.services.interfaces.ReservationService;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;

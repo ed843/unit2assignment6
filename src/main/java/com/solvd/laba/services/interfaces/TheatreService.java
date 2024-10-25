@@ -1,10 +1,8 @@
-package com.solvd.laba.services;
+package com.solvd.laba.services.interfaces;
 
 import com.solvd.laba.exceptions.ServiceException;
 import com.solvd.laba.generics.GenericService;
-import com.solvd.laba.models.Movie;
 import com.solvd.laba.models.Theatre;
-import com.solvd.laba.services.Mapping.TheatreMapper;
 
 import java.util.List;
 

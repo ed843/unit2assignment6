@@ -3,7 +3,7 @@ package com.solvd.laba.persistence.impl;
 import com.solvd.laba.DAO.TheatreDao;
 import com.solvd.laba.persistence.AbstractDao;
 import com.solvd.laba.persistence.ConnectionFactory;
-import com.solvd.laba.records.Theatre;
+import com.solvd.laba.models.Theatre;
 
 import java.sql.*;
 import java.util.ArrayList;

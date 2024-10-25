@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.solvd.laba.services.Mapping.ScreeningMapper">
+    <resultMap id="ScreeningResultMap" type="Screening">
+        <id property="screeningId" column="screening_id"/>
+        <result property="screeningTime" column="screening_time"/>
+        <result property="movieId" column="movie_id"/>
+        <result property="theatreId" column="theatre_id"/>
+    </resultMap>
+
+    <select id="findById" resultMap="ScreeningResultMap">
+        SELECT * FROM Screening WHERE screening_id = #{id}
+    </select>
+
+    <select id="findAll" resultMap="ScreeningResultMap">
+        SELECT * FROM Screening
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="screeningId">
+        INSERT INTO Screening (screening_id, screening_time, movie_id, theatre_id)
+        VALUES (#{screeningId}, #{screeningTime}, #{movieId}, #{theatreId})
+    </insert>
+
+    <update id="update">
+        UPDATE Screening
+        SET screening_time = #{screeningTime},
+            movie_id = #{movieId},
+            theatre_id = #{theatreId}
+        WHERE screening_id = #{screeningId}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM Screening WHERE screening_id = #{screeningId}
+    </delete>
+
+    <select id="findByMovieId" resultMap="ScreeningResultMap">
+        SELECT * FROM Screening WHERE movie_id = #{movieId}
+    </select>
+</mapper>

@@ -1,4 +1,4 @@
-package com.solvd.laba.services;
+package com.solvd.laba.services.interfaces;
 
 import com.solvd.laba.exceptions.ServiceException;
 import com.solvd.laba.generics.GenericService;

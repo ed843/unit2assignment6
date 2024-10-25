@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+        <typeAlias type="com.solvd.laba.models.Movie" alias="Movie"/>
+        <typeAlias type="com.solvd.laba.models.Theatre" alias="Theatre"/>
+        <typeAlias type="com.solvd.laba.models.Screening" alias="Screening"/>
+        <typeAlias type="com.solvd.laba.models.User" alias="User"/>
+        <typeAlias type="com.solvd.laba.models.Reservation" alias="Reservation"/>
+    </typeAliases>
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://127.0.0.1:3306/calendar_tasks"/>
+                <property name="username" value="root"/>
+                <property name="password" value="password"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <mapper resource="mappers/MovieMapper.xml"/>
+        <mapper resource="mappers/TheatreMapper.xml"/>
+        <mapper resource="mappers/ScreeningMapper.xml"/>
+        <mapper resource="mappers/UserMapper.xml"/>
+        <mapper resource="mappers/ReservationMapper.xml"/>
+    </mappers>
+</configuration>

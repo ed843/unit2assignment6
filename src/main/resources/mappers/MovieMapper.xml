@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.solvd.laba.services.Mapping.MovieMapper">
+    <resultMap id="MovieResultMap" type="Movie">
+        <id property="movieId" column="movie_id"/>
+        <result property="title" column="title"/>
+        <result property="duration" column="duration"/>
+        <result property="genre" column="genre"/>
+        <result property="releaseDate" column="release_date"/>
+    </resultMap>
+
+    <select id="findById" resultMap="MovieResultMap">
+        SELECT * FROM Movie WHERE movie_id = #{id}
+    </select>
+
+    <select id="findAll" resultMap="MovieResultMap">
+        SELECT * FROM Movie
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="movieId">
+        INSERT INTO Movie (title, duration, genre, release_date)
+        VALUES (#{title}, #{duration}, #{genre}, #{releaseDate})
+    </insert>
+
+    <update id="update">
+        UPDATE Movie
+        SET title = #{title},
+            duration = #{duration},
+            genre = #{genre},
+            release_date = #{releaseDate}
+        WHERE movie_id = #{movieId}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM Movie WHERE movie_id = #{movieId}
+    </delete>
+
+    <select id="findByGenre" resultMap="MovieResultMap">
+        SELECT * FROM Movie WHERE genre = #{genre}
+    </select>
+</mapper>

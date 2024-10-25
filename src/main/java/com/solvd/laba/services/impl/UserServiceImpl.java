@@ -1,8 +1,9 @@
-package com.solvd.laba.services;
+package com.solvd.laba.services.impl;
 
 import com.solvd.laba.exceptions.ServiceException;
 import com.solvd.laba.models.User;
 import com.solvd.laba.services.Mapping.UserMapper;
+import com.solvd.laba.services.MyBatisConfig;
 import com.solvd.laba.services.interfaces.UserService;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;

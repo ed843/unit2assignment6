@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.solvd.laba.services.Mapping.ReservationMapper">
+    <resultMap id="ReservationResultMap" type="Reservation">
+        <id property="reservationId" column="reservation_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="screeningId" column="screening_id"/>
+        <result property="seatId" column="seat_id"/>
+        <result property="reservedAt" column="reserved_at"/>
+    </resultMap>
+
+    <select id="findById" resultMap="ReservationResultMap">
+        SELECT * FROM Reservation WHERE reservation_id = #{id}
+    </select>
+
+    <select id="findAll" resultMap="ReservationResultMap">
+        SELECT * FROM Reservation
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="reservationId">
+        INSERT INTO Reservation (reservation_id, user_id, screening_id, seat_id, reserved_at)
+        VALUES (#{reservationId}, #{userId}, #{screeningId}, #{seatId}, #{reservedAt})
+    </insert>
+
+    <update id="update">
+        UPDATE Reservation
+        SET user_id = #{userId},
+            screening_id = #{screeningId},
+            seat_id = #{seatId},
+            reserved_at = #{reservedAt}
+        WHERE reservation_id = #{reservationId}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM Reservation WHERE reservation_id = #{reservationId}
+    </delete>
+
+    <select id="findByStatus" resultMap="ReservationResultMap">
+        SELECT * FROM reservation WHERE status = #{status}
+    </select>
+</mapper>

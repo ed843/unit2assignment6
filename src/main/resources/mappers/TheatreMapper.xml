@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.solvd.laba.persistence.TheatreMapper">
+<mapper namespace="com.solvd.laba.services.Mapping.TheatreMapper">
     <resultMap id="TheatreResultMap" type="Theatre">
         <id property="theatreId" column="theatre_id"/>
         <result property="name" column="name"/>

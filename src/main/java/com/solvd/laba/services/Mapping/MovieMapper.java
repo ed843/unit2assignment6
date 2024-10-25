@@ -1,4 +1,4 @@
-package com.solvd.laba.services;
+package com.solvd.laba.services.Mapping;
 
 import com.solvd.laba.models.Movie;
 

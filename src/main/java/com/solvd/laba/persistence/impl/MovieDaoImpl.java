@@ -4,15 +4,13 @@ import com.solvd.laba.DAO.MovieDao;
 import com.solvd.laba.persistence.AbstractDao;
 import com.solvd.laba.persistence.ConnectionFactory;
 import com.solvd.laba.persistence.DatabaseDialect;
-import com.solvd.laba.records.Movie;
+import com.solvd.laba.models.Movie;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MovieDaoImpl extends AbstractDao<Movie, Integer> implements MovieDao {
-
-
     public MovieDaoImpl(ConnectionFactory connectionFactory) {
         super(connectionFactory);
     }
