@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.solvd.laba.persistence.TheatreMapper">
+    <resultMap id="TheatreResultMap" type="Theatre">
+        <id property="theatreId" column="theatre_id"/>
+        <result property="name" column="name"/>
+        <result property="location" column="location"/>
+    </resultMap>
+
+    <select id="findById" resultMap="TheatreResultMap">
+        SELECT * FROM Theatre WHERE theatre_id = #{id}
+    </select>
+
+    <select id="findAll" resultMap="TheatreResultMap">
+        SELECT * FROM Theatre
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="theatreId">
+        INSERT INTO Theatre (theatre_name, location)
+        VALUES (#{name}, #{location})
+    </insert>
+
+    <update id="update">
+        UPDATE Theatre
+        SET theatre_name = #{name},
+            location = #{location}
+        WHERE theatre_id = #{theatreId}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM Theatre WHERE theatre_id = #{theatreId}
+    </delete>
+
+    <select id="findByLocation" resultMap="TheatreResultMap">
+        SELECT * FROM Theatre WHERE location = #{location}
+    </select>
+</mapper>

@@ -1,4 +1,4 @@
-package com.solvd.laba.records;
+package com.solvd.laba.models;
 
 public class Theatre {
     private int theatreId;

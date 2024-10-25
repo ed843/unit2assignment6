@@ -2,7 +2,7 @@ package com.solvd.laba.services;
 
 import com.solvd.laba.exceptions.ServiceException;
 import com.solvd.laba.generics.GenericService;
-import com.solvd.laba.records.Movie;
+import com.solvd.laba.models.Movie;
 
 import java.util.List;
 
