@@ -1,16 +1,16 @@
 package com.solvd.laba.models;
 
-import java.sql.*;
+import java.sql.Timestamp;
 
 public class Movie {
     private int movieId;
     private String title;
     private int duration;
     private String genre;
-    private Date releaseDate;
+    private Timestamp releaseDate;
 
     // Constructor
-    public Movie(String title, int duration, String genre, Date releaseDate) {
+    public Movie(String title, int duration, String genre, Timestamp releaseDate) {
         this.title = title;
         this.duration = duration;
         this.genre = genre;
@@ -34,7 +34,7 @@ public class Movie {
     public String getGenre() {
         return genre;
     }
-    public Date getReleaseDate() {
+    public Timestamp getReleaseDate() {
         return releaseDate;
     }
 
@@ -51,8 +51,13 @@ public class Movie {
     public void setGenre(String genre) {
         this.genre = genre;
     }
-    public void setReleaseDate(Date releaseDate) {
+    public void setReleaseDate(Timestamp releaseDate) {
         this.releaseDate = releaseDate;
+    }
+
+    @Override
+    public String toString() {
+        return "{movieId=" + movieId + ", title=" + title + ", duration=" + duration + ", genre=" + genre + ", releaseDate=" + releaseDate + "}";
     }
 }
 

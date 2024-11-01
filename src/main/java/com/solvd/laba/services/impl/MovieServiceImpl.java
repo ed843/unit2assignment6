@@ -4,7 +4,7 @@ import com.solvd.laba.exceptions.ServiceException;
 import com.solvd.laba.models.Movie;
 import com.solvd.laba.services.Mapping.MovieMapper;
 import com.solvd.laba.services.MyBatisConfig;
-import com.solvd.laba.services.interfaces.MovieService;
+import com.solvd.laba.services.interfaces.MovieService.MovieService;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 

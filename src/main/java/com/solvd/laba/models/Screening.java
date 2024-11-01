@@ -9,7 +9,7 @@ public class Screening {
     private Integer theatreId;
     private double price;
 
-    Screening(int screeningId, Timestamp screeningTime, Integer movieId, Integer theatreId, double price) {
+    public Screening(int screeningId, Timestamp screeningTime, Integer movieId, Integer theatreId, double price) {
         this.screeningId = screeningId;
         this.screeningTime = screeningTime;
         this.movieId = movieId;

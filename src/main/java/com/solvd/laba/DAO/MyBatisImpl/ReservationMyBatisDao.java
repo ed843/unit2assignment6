@@ -1,59 +1,50 @@
-package com.solvd.laba.services.impl;
+package com.solvd.laba.DAO.MyBatisImpl;
 
+import com.solvd.laba.DAO.ReservationDao;
 import com.solvd.laba.exceptions.ServiceException;
 import com.solvd.laba.models.Reservation;
+import com.solvd.laba.models.User;
 import com.solvd.laba.services.Mapping.ReservationMapper;
+import com.solvd.laba.services.Mapping.UserMapper;
 import com.solvd.laba.services.MyBatisConfig;
-import com.solvd.laba.services.interfaces.ReservationService.ReservationService;
-import com.solvd.laba.services.listener.ReservationListener;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-public class ReservationServiceImpl implements ReservationService {
-    private List<ReservationListener> listeners = new ArrayList<>();
-
+public class ReservationMyBatisDao implements ReservationDao {
     private final SqlSessionFactory sqlSessionFactory;
 
-    public ReservationServiceImpl() {
+    public ReservationMyBatisDao() {
         this.sqlSessionFactory = MyBatisConfig.getSqlSessionFactory();
     }
 
     @Override
-    public Reservation findByStatus(String status) throws ServiceException {
+    public Reservation findByStatus(String status) {
         try (SqlSession session = sqlSessionFactory.openSession()) {
             ReservationMapper mapper = session.getMapper(ReservationMapper.class);
             return mapper.findByStatus(status);
-        } catch (Exception e) {
-            throw new ServiceException("Failed to get reservation with status " + status, e);
         }
     }
 
     @Override
-    public Reservation findById(Integer integer) throws ServiceException {
+    public Reservation findById(Integer integer) {
         try (SqlSession session = sqlSessionFactory.openSession()) {
             ReservationMapper mapper = session.getMapper(ReservationMapper.class);
             return mapper.findById(integer);
-        } catch (Exception e) {
-            throw new ServiceException("Failed to get reservation with id " + integer, e);
         }
     }
 
     @Override
-    public List<Reservation> findAll() throws ServiceException {
+    public List<Reservation> findAll() {
         try (SqlSession session = sqlSessionFactory.openSession()) {
             ReservationMapper mapper = session.getMapper(ReservationMapper.class);
             return mapper.findAll();
-        } catch (Exception e) {
-            throw new ServiceException("Failed to get reservations", e);
         }
     }
 
     @Override
-    public void save(Reservation entity) throws ServiceException {
+    public void save(Reservation entity) {
         try (SqlSession session = sqlSessionFactory.openSession()) {
             ReservationMapper mapper = session.getMapper(ReservationMapper.class);
             mapper.insert(entity);
@@ -61,31 +52,18 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public void update(Reservation entity) throws ServiceException {
+    public void update(Reservation entity) {
         try (SqlSession session = sqlSessionFactory.openSession()) {
             ReservationMapper mapper = session.getMapper(ReservationMapper.class);
             mapper.update(entity);
-        } catch (Exception e) {
-            throw new ServiceException("Failed to update reservation", e);
         }
     }
 
     @Override
-    public void delete(Reservation entity) throws ServiceException {
+    public void delete(Reservation entity) {
         try (SqlSession session = sqlSessionFactory.openSession()) {
             ReservationMapper mapper = session.getMapper(ReservationMapper.class);
             mapper.delete(entity);
-        } catch (Exception e) {
-            throw new ServiceException("Failed to delete reservation", e);
         }
-    }
-
-    public void addListener(ReservationListener listener) {
-        listeners.add(listener);
-    }
-
-    public void createReservation(Reservation reservation) {
-        // Save reservation
-        listeners.forEach(l -> l.onReservationCreated(reservation));
     }
 }

@@ -28,5 +28,5 @@ public class SqlProvider {
         }
     }
 
-    // Add more methods for other SQL queries...
+    // just this for brevity
 }
